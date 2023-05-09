@@ -1,6 +1,6 @@
 /* The following project was taken from Khan Academy's SQL course (Project Data Dig). The instructions include the following:
 
-"Choose a data set or create a data set like that, and use advanced SELECT queries to discover things about the data. 
+"Choose a data set or create a data set, and use advanced SELECT queries to discover things about the data. 
 What sort of questions might one have about that data, like if they were using it for an app or a business idea?"
 
 My questions and queries begin at line 57 */
