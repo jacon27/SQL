@@ -1,4 +1,11 @@
-/* DATABASE CONSISTS OF TWO TABLES
+/* The following project was created from Khan Academy's SQL course (Project Famous People). The instructions are as follows:
+
+"In this project, you’re going to make your own table with some small set of 'famous people', 
+then make more tables about things they do and join those to create nice human readable lists."
+
+My questions and queries begin at line 48.
+
+DATABASE CONSISTS OF TWO TABLES
 1. the_office_characters: list of characters from the office, full names, and occupations
 2. relationships: list of characters and their relationships in the office
 
@@ -38,31 +45,42 @@ INSERT INTO relationships (id, character_id1, character_id2, relationship_status
 (9, 14, 1, 'Subordinate'), 
 (10, 9, 12, 'Crush');
 
--- List all characters and their occupations 
+-- What are all the characters and their occupations?
 SELECT fullname, occupation 
 FROM the_office_characters;
 
--- List all relationships
+-- How are the characters related?
 SELECT c1.fullname AS 'Character 1', r.relationship_status, c2.fullname AS 'Character 2'
 FROM relationships r
 JOIN the_office_characters c1 ON r.character_id1 = c1.id
 JOIN the_office_characters c2 ON r.character_id2 = c2.id;
 
---List all marraiges
+-- What are the character relationships along with their occupations?
+SELECT 
+c1.fullname AS 'Character 1', 
+c1.occupation AS 'Occupation 1',
+r.relationship_status, 
+c2.fullname AS 'Character 2',
+c2.occupation AS 'Occupation 2'
+FROM relationships r
+JOIN the_office_characters c1 ON r.character_id1 = c1.id
+JOIN the_office_characters c2 ON r.character_id2 = c2.id;
+
+-- Which characters are married by the end of the series?
 SELECT c1.fullname AS 'Character 1', c2.fullname AS 'Character 2'
 FROM relationships r
 JOIN the_office_characters c1 ON r.character_id1 = c1.id
 JOIN the_office_characters c2 ON r.character_id2 = c2.id
 WHERE r.relationship_status = 'Married';
 
---List all rivals 
+-- Who are rivals?
 SELECT c1.fullname AS 'Character 1', c2.fullname AS 'Character 2'
 FROM relationships r
 JOIN the_office_characters c1 ON r.character_id1 = c1.id
 JOIN the_office_characters c2 ON r.character_id2 = c2.id
 WHERE r.relationship_status = 'Rivals';
 
---List all the relationships of a specific character, e.g., Michael Scott
+-- How are the characters related to a specific character, e.g., Michael Scott?
 SELECT c1.fullname AS 'Character 1', r.relationship_status, c2.fullname AS 'Character 2'
 FROM relationships r
 JOIN the_office_characters c1 ON r.character_id1 = c1.id
