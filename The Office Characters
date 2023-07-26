@@ -3,13 +3,13 @@
 "In this project, you’re going to make your own table with some small set of 'famous people', 
 then make more tables about things they do and join those to create nice human readable lists."
 
-My questions and queries begin at line 48.
+My questions and queries begin at line 48. */
 
-DATABASE CONSISTS OF TWO TABLES
+/* DATABASE CONSISTS OF TWO TABLES
 1. the_office_characters: list of characters from the office, full names, and occupations
 2. relationships: list of characters and their relationships in the office
 
-AIM: to join both tables to show character connection, with their names and the type of relationship they have.
+AIM: to join both tables to show character connection, with their names, occupations, and the type of relationships they have.
 
 */
 
