@@ -1,0 +1,70 @@
+/* DATABASE CONSISTS OF TWO TABLES
+1. the_office_characters: list of characters from the office, full names, and occupations
+2. relationships: list of characters and their relationships in the office
+
+AIM: to join both tables to show character connection, with their names and the type of relationship they have.
+
+*/
+
+CREATE TABLE the_office_characters (id INTEGER PRIMARY KEY, fullname TEXT, occupation TEXT); 
+INSERT INTO the_office_characters (id, fullname, occupation) VALUES
+(1, "Michael Scott", "Regional Manager"), 
+(2, "Dwight Schrute", "Assistant to the Regional Manager"), 
+(3, "Jim Halpert", "Sales Rep"), 
+(4, "Pam Beesly", "Receptionist"), 
+(5, "Stanley Hudson", "Sales Rep"), 
+(6, "Kevin Malone", "CPA"), 
+(7, "Toby Flenderson", "HR Rep"), 
+(8, "Angela Martin", "CPA"), 
+(9, "Kelly Kapoor", "Cx Rep"), 
+(10, "Phyllis Lapin-Vance", "Sales Rep"),
+(11, "Meredith Palmer", "SR Rep"),
+(12, "Ryan Howard", "Temp"),
+(13, "Oscar Martinez", "CPA"),
+(14, "Darryl Philbin", "Warehouse Foreman"),
+(15, "Creed Bratton", "QA Rep");
+
+CREATE TABLE relationships (id INTEGER PRIMARY KEY, character_id1 INTEGER, character_id2 INTEGER, relationship_status TEXT);
+ 
+INSERT INTO relationships (id, character_id1, character_id2, relationship_status) VALUES
+(1, 1, 2, 'Boss-Subordinate'), 
+(2, 2, 8, 'Married'), 
+(3, 3, 4, 'Married'), 
+(4, 1, 3, 'Friends'), 
+(5, 3, 2, 'Rivals'), 
+(6, 1, 7, 'Rivals'), 
+(7, 10, 1, 'Friends'),
+(8, 13, 8, 'Rivals'), 
+(9, 14, 1, 'Subordinate'), 
+(10, 9, 12, 'Crush');
+
+-- List all characters and their occupations 
+SELECT fullname, occupation 
+FROM the_office_characters;
+
+-- List all relationships
+SELECT c1.fullname AS 'Character 1', r.relationship_status, c2.fullname AS 'Character 2'
+FROM relationships r
+JOIN the_office_characters c1 ON r.character_id1 = c1.id
+JOIN the_office_characters c2 ON r.character_id2 = c2.id;
+
+--List all marraiges
+SELECT c1.fullname AS 'Character 1', c2.fullname AS 'Character 2'
+FROM relationships r
+JOIN the_office_characters c1 ON r.character_id1 = c1.id
+JOIN the_office_characters c2 ON r.character_id2 = c2.id
+WHERE r.relationship_status = 'Married';
+
+--List all rivals 
+SELECT c1.fullname AS 'Character 1', c2.fullname AS 'Character 2'
+FROM relationships r
+JOIN the_office_characters c1 ON r.character_id1 = c1.id
+JOIN the_office_characters c2 ON r.character_id2 = c2.id
+WHERE r.relationship_status = 'Rivals';
+
+--List all the relationships of a specific character, e.g., Michael Scott
+SELECT c1.fullname AS 'Character 1', r.relationship_status, c2.fullname AS 'Character 2'
+FROM relationships r
+JOIN the_office_characters c1 ON r.character_id1 = c1.id
+JOIN the_office_characters c2 ON r.character_id2 = c2.id
+WHERE c1.fullname = 'Michael Scott' OR c2.fullname = 'Michael Scott';
