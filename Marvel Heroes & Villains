@@ -54,7 +54,7 @@ INSERT INTO marvels VALUES(24, "Venom", 78, "Neutral", "Male", 1.90, 118, "EUA",
 INSERT INTO marvels VALUES(25, "Juggernaut", 76, "Neutral", "Male", 2.87, 862, "EUA", 2, 7, 2, 7, 1, 4);
 INSERT INTO marvels VALUES(26, "Professor X", 58, "Good", "Male", 1.83, 86, "EUA", 5, 2, 2, 2, 5, 3);
 
---what are the avg, max, and min height and weight for the marvel heroes? 
+#1. What are the avg, max, and min height and weight for the marvel heroes? 
 SELECT AVG(height_m) as avg_height,
        AVG(weight_kg) as avg_weight,
        MAX(height_m) as max_height,
@@ -63,7 +63,7 @@ SELECT AVG(height_m) as avg_height,
        MIN(weight_kg) as min_weight
 FROM marvels;
 
---what about those numbers for the alignment category? (using HAVING)
+#2. What about those numbers for the alignment category? (using HAVING)
 SELECT alignment,
        AVG(height_m) as avg_height,
        AVG(weight_kg) as avg_weight,
@@ -75,7 +75,7 @@ FROM marvels
 GROUP BY alignment
 HAVING COUNT(*) > 1;
 
---group the characters by height category
+#3. Group the characters by height category
 SELECT CASE
            WHEN height_m < 1.7 THEN 'Short'
            WHEN height_m >= 1.7 AND height_m < 1.9 THEN 'Average'
@@ -85,7 +85,7 @@ SELECT CASE
 FROM marvels
 GROUP BY height_category;
 
---Filter characters that are popular (ranking <= 10), good alignment, and have high intelligence (>= 5)
+#4. Filter characters that are popular (ranking <= 10), good alignment, and have high intelligence (>= 5)
 SELECT *
 FROM marvels
 WHERE popularity >= 1
@@ -93,7 +93,7 @@ WHERE popularity >= 1
   AND alignment = 'Good'
   AND intelligence >= 5;
   
---Which characters have the highest total power grid score, and how does it vary across different alignments?
+#5. Which characters have the highest total power grid score, and how does it vary across different alignments?
  SELECT name, alignment,
        (intelligence + strength + speed + durability + energy_Projection + fighting_Skills) as total_power_grid_score
 FROM marvels
