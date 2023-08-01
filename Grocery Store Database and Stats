@@ -1,4 +1,5 @@
---Create a grocery store database
+/* Create a grocery store database
+*/
 
 CREATE TABLE store (id PRIMARY INTEGER KEY, item TEXT, section TEXT, price INTEGER, popularity INTEGER);
 
@@ -18,16 +19,16 @@ INSERT INTO store VALUES (13, "wine", "alcohol", 15.99, 67);
 INSERT INTO store VALUES (14, "protein powder", "health", 39.99, 38);
 INSERT INTO store VALUES (15, "mixed berries", "frozen", 4.99, 42);
 
---display the database ordered by price. 
+#1. Display the database ordered by price. 
 SELECT * FROM store 
 ORDER BY price desc;
 
---what is the average price of items in the bulk section? 
+#2. What is the average price of items in the bulk section? 
 SELECT AVG(price) "avg bulk item price"
 FROM store
 WHERE section='bulk';
 
---what are the 5 most popular items? 
+#3. What are the 5 most popular items? 
 SELECT item, price, popularity
 FROM store
 ORDER BY popularity desc
