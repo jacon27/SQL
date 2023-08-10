@@ -4,8 +4,7 @@ Then I created a table to insert Spotify data into.
 Finally, I performed analytics on the data using SQL. 
 */
 
-/* Creating the table: 
-*/
+--Creating the table: 
 CREATE TABLE BIT_DB.Spotifydata (
 id integer PRIMARY KEY,
 artist_name varchar NOT NULL,
@@ -36,14 +35,42 @@ Next, I explored the data using the following SQL.
 SELECT
 artist_name
 ,track_name
-,avg(popularity)
-,avg(danceability)
-,avg(energy)
+,AVG(popularity)
+,AVG(danceability)
+,AVG(energy)
 FROM BIT_DB.spotifydata
-GROUP BY artist_name, track_name
+GROUP BY artist_name, track_name;
 
 --#2. Who are the Top 10 artists are by popularity?
 SELECT track_name, artist_name, popularity
 FROM BIT_DB.spotifydata
 ORDER BY popularity desc
-LIMIT 10
+LIMIT 10;
+
+--#3. What artist released the longest song?
+SELECT artist_name, track_name, MAX(duration_ms) / 1000 AS song_length_seconds
+FROM BIT_DB.Spotifydata;
+
+--#4. What's the average danceability for the 10 most popular songs?
+SELECT AVG(danceability) AS average_danceability_top_10
+FROM (
+    SELECT danceability
+    FROM BIT_DB.Spotifydata
+    ORDER BY popularity DESC
+    LIMIT 10
+) AS top_10_songs;
+
+--#5.Which songs have a positive mood but are acoustic in nature?
+SELECT artist_name, track_name, valence, acousticness
+FROM BIT_DB.Spotifydata
+WHERE valence > 0.6 AND acousticness > 0.3;
+
+--#6. Are songs with higher BPM (tempo) more popular?
+SELECT artist_name, track_name, AVG(popularity) AS avg_popularity, 
+CASE 
+    WHEN tempo < 100 THEN 'Low BPM' 
+    WHEN tempo BETWEEN 100 AND 140 THEN 'Medium BPM' 
+    ELSE 'High BPM' 
+END AS bpm_category
+FROM BIT_DB.Spotifydata
+GROUP BY bpm_category;
