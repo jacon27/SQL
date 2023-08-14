@@ -98,3 +98,8 @@ CASE
     ELSE "Improvements Needed"
     END AS "Recommendation"
 FROM CityBikeLanes;
+
+--#3. Rank the bike lanes based on year installed.
+SELECT id, year_installed,street,
+    RANK() OVER(ORDER BY year_installed ASC) AS rank_by_year_installed
+FROM CityBikeLanes;
