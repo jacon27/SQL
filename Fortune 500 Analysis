@@ -63,9 +63,30 @@ VALUES
 --#1.) Assign all the companies in the Healthcare industry as "mother friendly workplace", "acceptable", or "abysmal" based on the maternity leave offered. 
 SELECT company_name, maternity_leave_weeks,
     CASE 
-        WHEN maternity_leave_weeks > 12 THEN "Mother_Friendly_Workplace"
-        WHEN maternity_leave_weeks >=8 AND maternity_leave_weeks <= 12 THEN "Acceptable"
-        ELSE "Abysmal" 
+        WHEN maternity_leave_weeks > 12 THEN 'Mother_Friendly_Workplace'
+        WHEN maternity_leave_weeks >=8 AND maternity_leave_weeks <= 12 THEN 'Acceptable'
+        ELSE 'Abysmal' 
     END AS maternity_leave_category
 FROM fortune_companies
-WHERE industry = "Healthcare";
+WHERE industry = 'Healthcare';
+
+--#2.) Which industries have an average revenue of at least $200 Billion, and what are their avg revenues?
+SELECT industry, ROUND(AVG(revenue), 2) AS average_revenue
+FROM fortune_companies
+GROUP BY industry
+HAVING AVG(revenue) >= 200.0;
+
+--#3.) Which companies have healthcare benefits and at least 20 paid time off days?
+SELECT company_name
+,industry
+,healthcare_benefits
+,paid_time_off_days
+FROM fortune_companies
+WHERE healthcare_benefits = 1 AND paid_time_off_days >= 20;
+
+--#4.) Which company in the Retail industry has the least revenue, and what's their revenue? 
+SELECT company_name, MIN(revenue) AS lowest_revenue
+FROM fortune_companies
+WHERE industry = 'Retail'
+GROUP BY industry ASC
+LIMIT 1;
