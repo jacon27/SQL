@@ -59,3 +59,13 @@ VALUES
     ('Company KK', 'Healthcare', 150.2, 3400, 0, 16, 8, 5.3);
 
 # Analysis:
+
+--#1.) Assign all the companies in the Healthcare industry as "mother friendly workplace", "acceptable", or "abysmal" based on the maternity leave offered. 
+SELECT company_name, maternity_leave_weeks,
+    CASE 
+        WHEN maternity_leave_weeks > 12 THEN "Mother_Friendly_Workplace"
+        WHEN maternity_leave_weeks >=8 AND maternity_leave_weeks <= 12 THEN "Acceptable"
+        ELSE "Abysmal" 
+    END AS maternity_leave_category
+FROM fortune_companies
+WHERE industry = "Healthcare";
