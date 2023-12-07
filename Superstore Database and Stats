@@ -52,15 +52,16 @@ WHERE category = 'Kitchen Supplies';
 --#4. Which items have a higher rating than the overall average rating of all the products in the superstore?
 WITH AverageRating AS 
     (SELECT AVG(average_rating) AS overall_average_rating
-    FROM superstore)
+     FROM superstore)
 SELECT 
-    item_id,
-    item_name,
-    category,
-    price,
-    stock_quantity,
-    average_rating
+    s.item_id,
+    s.item_name,
+    s.category,
+    s.price,
+    s.stock_quantity,
+    s.average_rating
 FROM 
-    superstore, AverageRating
-WHERE 
-    average_rating > overall_average_rating;
+    superstore s
+JOIN 
+    AverageRating ar ON s.average_rating > ar.overall_average_rating;
+
