@@ -1,5 +1,7 @@
 /* This is an exploration involving healthcare data taken from Synthea, a synthetic patient database. 
-I created the tables below and answered questions using Postgresql.
+I created the tables below and answered questions using PostgreSQL.
+
+The questions and SQL start at line 76.
 */
 
 CREATE TABLE conditions (
