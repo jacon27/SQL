@@ -70,3 +70,9 @@ CREATE TABLE patients
 ,INCOME int
 ,Mrn int
 );
+
+-- 1.) What are the details of all inpatient and ambulatory encounters that concluded throughout 2023?
+SELECT *
+FROM public.encounters
+WHERE encounterclass IN ('inpatient', 'ambulatory')
+AND stop BETWEEN '2023-01-01 00:00' AND '2023-12-31 23:59';
