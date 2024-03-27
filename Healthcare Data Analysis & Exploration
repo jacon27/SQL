@@ -88,7 +88,7 @@ GROUP BY description
 HAVING count(*) > 2000
 ORDER BY COUNT(*) DESC;
 
--- 4.) -- Write a query that selects all the patients names from Boston
+-- 4.) Write a query that selects all the patients names from Boston
 SELECT first || ' ' || last AS patient_name
 FROM public.patients
 WHERE city = 'Boston';
