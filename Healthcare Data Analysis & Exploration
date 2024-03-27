@@ -161,3 +161,14 @@ SELECT
 FROM PatientAgeAtEncounter c
 ORDER BY c.patient_name, c.encounter_start;
 
+-- 10.) Rank patients based on their total healthcare expenses. 
+-- Select the patient's name, total expenses, and their rank. Order the results by the rank.
+
+SELECT
+    p.first || ' ' || p.last AS patient_name,
+    p.healthcare_expenses AS total_expense,
+    RANK() OVER (ORDER BY p.healthcare_expenses DESC) AS expense_rank
+FROM
+    public.patients AS p
+ORDER BY
+    expense_rank;
