@@ -78,3 +78,30 @@ SELECT *
 FROM public.encounters
 WHERE encounterclass IN ('inpatient', 'ambulatory')
 AND stop BETWEEN '2023-01-01 00:00' AND '2023-12-31 23:59';
+
+-- 2.) How many of each unique conditions are there in the database, ordered by the most frequent conditions first? (Only those over 5000 and without BMI?)
+SELECT description
+,COUNT(*) AS count_of_cond
+FROM public.conditions
+WHERE description != 'Body Mass Index 30.0-30.9, adult'
+GROUP BY description 
+HAVING count(*) > 2000
+ORDER BY COUNT(*) DESC;
+
+-- 4.) -- Write a query that selects all the patients names from Boston
+SELECT first || ' ' || last AS patient_name
+FROM public.patients
+WHERE city = 'Boston';
+
+-- 5.) Write a query that retreives all the patients who have been diagnosed with Chronic Kidney Disease. (ICD-9 Codes: 585.1, 585.2, 585.3, 585.4)
+SELECT *
+FROM public.conditions
+WHERE code IN ('585.1', '585.2', '585.3', '585.4');
+
+-- 6.) Write a query that does the following: 1. List out the number of patients by city in descending order, 2. Does not include Boston 3. Must have at least 100 patients from that city.
+SELECT city, count(*)
+FROM public.patients
+WHERE city != 'Boston'
+GROUP BY city
+HAVING count(*) >= 100
+ORDER BY count(*) DESC;
