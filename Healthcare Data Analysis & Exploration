@@ -74,12 +74,15 @@ CREATE TABLE patients
 );
 
 -- 1.) What are the details of all inpatient and ambulatory encounters that concluded throughout 2023?
+
 SELECT *
 FROM public.encounters
 WHERE encounterclass IN ('inpatient', 'ambulatory')
 AND stop BETWEEN '2023-01-01 00:00' AND '2023-12-31 23:59';
 
--- 2.) How many of each unique conditions are there in the database, ordered by the most frequent conditions first? (Only those over 5000 and without BMI?)
+-- 2.) How many of each unique conditions are there in the database, ordered by the most frequent conditions first? 
+-- (Only those over 5000 and without BMI?)
+
 SELECT description
 ,COUNT(*) AS count_of_cond
 FROM public.conditions
@@ -89,19 +92,72 @@ HAVING count(*) > 2000
 ORDER BY COUNT(*) DESC;
 
 -- 4.) Write a query that selects all the patients names from Boston
+
 SELECT first || ' ' || last AS patient_name
 FROM public.patients
 WHERE city = 'Boston';
 
--- 5.) Write a query that retreives all the patients who have been diagnosed with Chronic Kidney Disease. (ICD-9 Codes: 585.1, 585.2, 585.3, 585.4)
+-- 5.) Write a query that retreives all the patients who have been diagnosed with Chronic Kidney Disease. 
+-- (ICD-9 Codes: 585.1, 585.2, 585.3, 585.4)
+
 SELECT *
 FROM public.conditions
 WHERE code IN ('585.1', '585.2', '585.3', '585.4');
 
--- 6.) Write a query that does the following: 1. List out the number of patients by city in descending order, 2. Does not include Boston 3. Must have at least 100 patients from that city.
+-- 6.) Write a query that does the following: 
+-- 1. List out the number of patients by city in descending order, 
+-- 2. Does not include Boston 
+-- 3. Must have at least 100 patients from that city.
+
 SELECT city, count(*)
 FROM public.patients
 WHERE city != 'Boston'
 GROUP BY city
 HAVING count(*) >= 100
 ORDER BY count(*) DESC;
+
+-- 7.) Retrieve a list of patients along with their conditions, including patient name, condition description, 
+--  and the date the condition was recorded. Order the results by patient name and condition start date.
+
+SELECT p.first || ' ' || p.last AS patient_name
+	, c.description
+	, c.start
+	, c.stop
+FROM public.conditions AS c
+INNER JOIN public.patients AS p
+ON c.patient = p.id
+ORDER BY patient_name, c.start;
+
+-- 8.) Calculate the total healthcare expenses and coverage for patients diagnosed with 'Hypertension'. 
+-- Show patient name, total expenses, and total coverage. Group the results by patient name.
+
+SELECT p.first || ' ' || p.last AS patient_name
+    , p.healthcare_expenses AS total_expense
+    , p.healthcare_coverage AS total_coverage
+FROM public.patients AS p
+JOIN public.conditions AS c ON p.id = c.patient
+WHERE c.description ILIKE '%hypertension%'
+GROUP BY p.id, patient_name, p.healthcare_expenses, p.healthcare_coverage;
+
+-- 9.) Calculate the age of each patient at the time of each encounter. 
+-- Display the patient's name, encounter date, and age. 
+-- Order by patient name and encounter date.
+
+WITH PatientAgeAtEncounter AS (
+    SELECT
+        p.Id AS patient_id,
+        p.first || ' ' || p.last AS patient_name,
+        p.BIRTHDATE,
+        e.Id AS encounter_id,
+        e.START AS encounter_start
+    FROM public.patients p
+    JOIN public.encounters e ON p.Id = e.PATIENT
+)
+
+SELECT
+    c.patient_name,
+    c.encounter_start,
+    EXTRACT(YEAR FROM AGE(c.encounter_start, c.BIRTHDATE)) AS age_at_encounter
+FROM PatientAgeAtEncounter c
+ORDER BY c.patient_name, c.encounter_start;
+
