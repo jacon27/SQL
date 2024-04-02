@@ -9,7 +9,7 @@ Come up with flu shots dashboard for 2022 that does the following:
 1.) Total # of patients getting flu shots stratified by
 	a.) Age
 	b.) Race
-	c.) Country (On a Map)
+	c.) County (On a Map)
 	d.) Overall
 2.) Running total of flu shots over the course of 2022
 3.) Total number of flu shots given in 2022
