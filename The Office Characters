@@ -1,11 +1,11 @@
-/* The following project was created from Khan Academy's SQL course (Project Famous People). The instructions are as follows:
+/* 
+
+The following project was created from Khan Academy's SQL course (Project Famous People). The instructions are as follows:
 
 "In this project, you’re going to make your own table with some small set of 'famous people', 
 then make more tables about things they do and join those to create nice human readable lists."
 
-*/
-
-/* DATABASE CONSISTS OF TWO TABLES
+DATABASE CONSISTS OF TWO TABLES
 1. the_office_characters: list of characters from the office, full names, and occupations
 2. relationships: list of characters and their relationships in the office
 
