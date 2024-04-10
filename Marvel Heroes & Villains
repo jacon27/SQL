@@ -3,15 +3,15 @@
 "Choose a data set or create a data set, and use advanced SELECT queries to discover things about the data. 
 What sort of questions might one have about that data, like if they were using it for an app or a business idea?"
 
-My questions and queries begin at line 57 
+My questions and queries begin at line 59 
 
-*/
-
-/* Marvel Heroes and Villains
+Source:
+Marvel Heroes and Villains
  Based on the website http://marvel.wikia.com/Main_Page
  with popularity data from http://observationdeck.io9.com/something-i-found-marvel-character-popularity-poll-cb-1568108064 
  and power grid data from http://marvel.wikia.com/Power_Grid#Power
  Collected by: https://www.khanacademy.org/profile/Mentrasto/
+
  */
 
 CREATE TABLE marvels (ID INTEGER PRIMARY KEY,
