@@ -1,6 +1,9 @@
 /*
 
-Cleaning Data in SQL Queries
+For this project, I used various SQL queries for cleaning data within a database, specifically 
+focusing on standardizing date formats, populating missing property address data, breaking out 
+addresses into individual components, changing yes/no indicators, and removing duplicate records 
+and unused columns from the NashvilleHousing table in the PortfolioProject database.
 
 */
 
