@@ -1,4 +1,5 @@
-/* For this project, I created a database for a "Superstore" and answered questions about the data using SQL.
+/* 
+For this project, I created a database for a "Superstore" and answered questions about the data using SQL.
 */
 
 CREATE TABLE superstore (
