@@ -1,4 +1,4 @@
-/* This analysis utilized the following Fortune 500 dataset:
+/* This analysis utilized the following Fortune 500 dataset. SQL questions start at line 64.
 */
 
 CREATE TABLE fortune_companies (
