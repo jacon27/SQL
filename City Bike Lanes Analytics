@@ -1,5 +1,5 @@
 /* For this project, I created a table to insert city bike lanes data into.
-Finally, I performed analytics on the data using SQL. 
+Finally, I performed analytics on the data using SQL. SQL questions start at line 75.
 */
 
 CREATE TABLE BIT_DB.CityBikeLanes (
