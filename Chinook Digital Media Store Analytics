@@ -1,4 +1,4 @@
-/* For this project, I used a dataset called chinook, which represents a digital media store 
+/* For this project, I used a dataset called Chinook, which represents a digital media store 
 and includes tables for artists, albums, media tracks, invoices, and customers. 
 https://www.kaggle.com/datasets/alaasedeeq/chinook/code 
 I answered the following questions using SQL.
